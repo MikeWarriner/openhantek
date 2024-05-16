@@ -142,11 +142,19 @@ int extractFirmware(const char *filenameDriver, const char *filenameFirmware, co
 	// Search for the symbols we want
     symbols = (asymbol**)malloc(bfd_get_symtab_upper_bound(bfdDriver));
 	symbolCount = bfd_canonicalize_symtab(bfdDriver, symbols);
+  printf("Symbol count %d\n", symbolCount);
+  if (symbolCount == 0) {
+    bfd_perror("Can't get symbol count");
+    bfd_close(bfdDriver);
+    return -4;
+  }
 	for(currentSymbol = 0; currentSymbol < symbolCount; currentSymbol++) {
 		symbolName = bfd_asymbol_name(symbols[currentSymbol]);
-		
-		if(strcmp(symbolName, nameSymbolFirmware) == 0)
+		printf("XXSymbol %s found (0x%04llx)\n", symbolName, symbols[currentSymbol]->value);
+    printf("%llx\n", symbols[currentSymbol]->value);
+		if(strcmp(symbolName, nameSymbolFirmware) == 0) {
 			offsetFirmware = symbols[currentSymbol]->value;
+    }
 		if(strcmp(symbolName, nameSymbolLoader) == 0)
 			offsetLoader = symbols[currentSymbol]->value;
 	}
@@ -158,7 +166,7 @@ int extractFirmware(const char *filenameDriver, const char *filenameFirmware, co
 	lengthFirmware = offsetLoader - offsetFirmware;
 	lengthLoader = sectionData->size - lengthFirmware;
 	
-	printf("Symbol %s found (offset 0x%04lx, %li bytes)\n", nameSymbolFirmware, (unsigned long int) offsetFirmware, (long int) lengthFirmware);
+	printf("Symbol %s found (offset 0x%04llx, %li bytes)\n", nameSymbolFirmware, (unsigned long long) offsetFirmware, (long int) lengthFirmware);
 	printf("Symbol %s found (offset 0x%04lx, %li bytes)\n", nameSymbolLoader, (unsigned long int) offsetLoader, (long int) lengthLoader);
 	
 	// Extract data
@@ -169,7 +177,9 @@ int extractFirmware(const char *filenameDriver, const char *filenameFirmware, co
 		bfd_close(bfdDriver);
 		return -4;
 	}
-	
+	printf("Extracting firmware and loader\n");
+  printf("offsetFirmware: %llu\n", offsetFirmware);
+  printf("lengthFirmware: %llu\n", lengthFirmware);
 	if(!bfd_get_section_contents(bfdDriver, sectionData, bufferFirmware, offsetFirmware, lengthFirmware)) {
 		bfd_perror("Can't get firmware contents");
 		bfd_close(bfdDriver);

@@ -1,0 +1,1 @@
+cc -I /opt/homebrew/opt/binutils/include -L /opt/homebrew/opt/binutils/lib -L /opt/homebrew/lib -L ~/Projects/hantek/binutils-gdb/libiberty -lbfd -lctf -lopcodes -lsframe -lglib-2.0 -lc -lz -lstdc++ -ldl -lzstd -liberty extractfw.c

@@ -8,6 +8,7 @@ using namespace Hantek;
 static ModelDSO6022BE modelInstance;
 static ModelDSO6022BL modelInstance2;
 
+
 static void initSpecifications(Dso::ControlSpecification& specification) {
     // 6022xx do not support any bulk commands
     specification.useControlNoBulk = true;
@@ -61,6 +62,8 @@ ModelDSO6022BL::ModelDSO6022BL() : DSOModel(ID, 0x04b5, 0x602a, 0x04b4, 0x602a, 
                                             Dso::ControlSpecification(2)) {
     initSpecifications(specification);
 }
+
+
 
 void ModelDSO6022BL::applyRequirements(HantekDsoControl *dsoControl) const {
    applyRequirements_(dsoControl);

@@ -41,6 +41,7 @@ int FindDevices::updateDeviceList() {
         }
 
         for (DSOModel* model : ModelRegistry::get()->models()) {
+          printf("Checking device %04x:%04x against %04x:%04x\n", descriptor.idVendor, descriptor.idProduct, model->vendorID, model->productID);
             // Check VID and PID for firmware flashed devices
             bool supported = descriptor.idVendor == model->vendorID && descriptor.idProduct == model->productID;
             // Devices without firmware have different VID/PIDs

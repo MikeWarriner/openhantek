@@ -14,5 +14,6 @@
         <file>firmware/dso6022be-loader.hex</file>
         <file>firmware/dso6022bl-firmware.hex</file>
         <file>firmware/dso6022bl-loader.hex</file>
+        <file>firmware/6254bd-loader.hex</file>
     </qresource>
 </RCC>

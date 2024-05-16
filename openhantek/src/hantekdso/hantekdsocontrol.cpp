@@ -16,6 +16,7 @@
 #include "hantekprotocol/bulkStructs.h"
 #include "hantekprotocol/controlStructs.h"
 #include "models/modelDSO6022.h"
+#include "models/model6254BD.h"
 #include "usb/usbdevice.h"
 
 using namespace Hantek;

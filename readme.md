@@ -3,9 +3,18 @@
 OpenHantek is a free software for Hantek and compatible (Voltcraft/Darkwire/Protek/Acetech) USB digital signal oscilloscopes.
 
 MFW - MacOS Apple Silicon.  Make sure QT6 is not installed!
+
+brew install qt@5 fftw
+
+
 mkdir build
+
 cd build
+
 cmake ../ -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt@5 -DCMAKE_CXX_FLAGS="-std=c++17"
+
+./openhantek/OpenHantek
+
 MFW
 
 <table><tr>

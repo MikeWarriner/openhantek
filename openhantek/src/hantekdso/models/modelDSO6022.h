@@ -16,3 +16,4 @@ struct ModelDSO6022BL : public DSOModel {
     ModelDSO6022BL();
     virtual void applyRequirements(HantekDsoControl* dsoControl) const override;
 };
+
